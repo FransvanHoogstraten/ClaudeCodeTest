@@ -2,24 +2,47 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Repository Status
+## Project Overview
 
-This is a newly initialized repository. There is currently no code, build system, or project structure in place.
+A simple Python calculator application demonstrating basic arithmetic operations with a test suite.
 
-## Getting Started
+## Development Commands
 
-When beginning development in this repository:
+### Setup
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-1. Check for a README.md or package.json/requirements.txt/Cargo.toml (or similar) to understand the project type and dependencies
-2. Look for build scripts, Makefiles, or task runners in the project root
-3. Check for test frameworks and testing conventions in the codebase
-4. Review any CI/CD configuration files (.github/workflows/, .gitlab-ci.yml, etc.)
+### Running the Application
+```bash
+python calculator.py
+```
 
-## Notes for Future Updates
+### Testing
+```bash
+# Run all tests
+pytest
 
-As the codebase develops, this file should be updated to include:
+# Run tests with coverage
+pytest --cov=. --cov-report=html
 
-- Common build, test, and development commands
-- High-level architecture and code organization patterns
-- Key design decisions and constraints
-- Integration points and external dependencies
+# Run specific test
+pytest test_calculator.py::TestCalculator::test_add
+
+# Run tests in verbose mode
+pytest -v
+```
+
+## Code Architecture
+
+### Structure
+- `calculator.py` - Contains the `Calculator` class with arithmetic operations (add, subtract, multiply, divide, power) and an interactive CLI in `main()`
+- `test_calculator.py` - Pytest-based unit tests with fixtures and comprehensive test coverage
+
+### Key Design Points
+- Calculator class methods are pure functions that don't maintain state
+- Division by zero raises a `ValueError` with descriptive message
+- Interactive CLI handles user input validation and error cases
+- Tests use pytest fixtures for Calculator instantiation
