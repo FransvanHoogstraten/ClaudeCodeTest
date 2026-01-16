@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFO Platform - Finance Operations Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">CFO Platform</h1>
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <span class="bell-icon">Notifications</span>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-profile">
+                        <div class="avatar">FM</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="app-body">
+            <!-- Sidebar Navigation -->
+            <nav class="sidebar-navigation">
+                <button class="sidebar-button active" data-tab="finance-dashboard">
+                    <span class="sidebar-label">Structure Map</span>
+                </button>
+                <button class="sidebar-button" data-tab="software-stack">
+                    <span class="sidebar-label">Software Stack</span>
+                </button>
+                <button class="sidebar-button" data-tab="monthly-close">
+                    <span class="sidebar-label">Monthly Close</span>
+                </button>
+                <button class="sidebar-button" data-tab="issues">
+                    <span class="sidebar-label">Issues</span>
+                    <span class="sidebar-badge">5</span>
+                </button>
+                <button class="sidebar-button" data-tab="approvals">
+                    <span class="sidebar-label">Approvals</span>
+                    <span class="sidebar-badge">3</span>
+                </button>
+            </nav>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+            <!-- Finance Function Dashboard Tab -->
+            <div id="finance-dashboard" class="tab-content active">
+                <div class="content-header">
+                    <h2>Structure Map</h2>
+                    <p class="subtitle">Visualize your finance operations from different perspectives</p>
+                </div>
+
+                <!-- Sub-tabs for different views -->
+                <div class="sub-tabs">
+                    <button class="sub-tab active" data-subtab="cash-flow">Cash Flow</button>
+                    <button class="sub-tab" data-subtab="data-flow">Data Flow</button>
+                    <button class="sub-tab" data-subtab="dependency">Dependency</button>
+                </div>
+
+                <!-- Cash Flow View (Waterfall Chart) -->
+                <div id="cash-flow" class="sub-tab-content active">
+                    <div class="view-description">
+                        <p>Monthly cash flow waterfall showing sources and uses of cash</p>
+                    </div>
+                    <div class="waterfall-chart">
+                        <div class="waterfall-bars">
+                            <!-- Starting Balance -->
+                            <div class="waterfall-item start">
+                                <div class="waterfall-bar positive" style="height: 240px;">
+                                    <div class="bar-label">$2.1M</div>
+                                </div>
+                                <div class="waterfall-label">Starting<br>Balance</div>
+                            </div>
+
+                            <!-- Cash In Items -->
+                            <div class="waterfall-item increase">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar positive" style="height: 150px;">
+                                    <div class="bar-label">+$650K</div>
+                                </div>
+                                <div class="waterfall-label">Customer<br>Payments</div>
+                            </div>
+
+                            <div class="waterfall-item increase">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar positive" style="height: 80px;">
+                                    <div class="bar-label">+$320K</div>
+                                </div>
+                                <div class="waterfall-label">New<br>Revenue</div>
+                            </div>
+
+                            <div class="waterfall-item increase">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar positive" style="height: 40px;">
+                                    <div class="bar-label">+$150K</div>
+                                </div>
+                                <div class="waterfall-label">Other<br>Income</div>
+                            </div>
+
+                            <!-- Cash Out Items -->
+                            <div class="waterfall-item decrease">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar negative" style="height: 120px;">
+                                    <div class="bar-label">-$480K</div>
+                                </div>
+                                <div class="waterfall-label">Vendor<br>Payments</div>
+                            </div>
+
+                            <div class="waterfall-item decrease">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar negative" style="height: 80px;">
+                                    <div class="bar-label">-$320K</div>
+                                </div>
+                                <div class="waterfall-label">Payroll</div>
+                            </div>
+
+                            <div class="waterfall-item decrease">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar negative" style="height: 50px;">
+                                    <div class="bar-label">-$200K</div>
+                                </div>
+                                <div class="waterfall-label">Operating<br>Expenses</div>
+                            </div>
+
+                            <div class="waterfall-item decrease">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar negative" style="height: 40px;">
+                                    <div class="bar-label">-$150K</div>
+                                </div>
+                                <div class="waterfall-label">Capital<br>Expenditures</div>
+                            </div>
+
+                            <!-- Ending Balance -->
+                            <div class="waterfall-item end">
+                                <div class="waterfall-connector"></div>
+                                <div class="waterfall-bar total" style="height: 240px;">
+                                    <div class="bar-label">$2.07M</div>
+                                </div>
+                                <div class="waterfall-label">Ending<br>Balance</div>
+                            </div>
+                        </div>
+
+                        <!-- Cash Flow Summary -->
+                        <div class="cashflow-summary">
+                            <div class="summary-section">
+                                <h4>Cash In</h4>
+                                <div class="summary-value positive">+$1,120K</div>
+                                <div class="summary-breakdown">
+                                    <div>Customer Payments: $650K</div>
+                                    <div>New Revenue: $320K</div>
+                                    <div>Other Income: $150K</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <h4>Cash Out</h4>
+                                <div class="summary-value negative">-$1,150K</div>
+                                <div class="summary-breakdown">
+                                    <div>Vendor Payments: $480K</div>
+                                    <div>Payroll: $320K</div>
+                                    <div>Operating Expenses: $200K</div>
+                                    <div>Capital Expenditures: $150K</div>
+                                </div>
+                            </div>
+                            <div class="summary-section">
+                                <h4>Net Change</h4>
+                                <div class="summary-value negative">-$30K</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Flow View (System Integration Map) -->
+                <div id="data-flow" class="sub-tab-content">
+                    <div class="view-description">
+                        <p>System integration map showing data flow between financial tools</p>
+                    </div>
+                    <div class="integration-map">
+                        <!-- Core System (Center) -->
+                        <div class="system-node central">
+                            <div class="system-name">NetSuite ERP</div>
+                            <div class="system-role">Core Financial System</div>
+                        </div>
+
+                        <!-- Upstream Systems (Revenue & Collections) -->
+                        <div class="integration-group upstream">
+                            <div class="system-node">
+                                <div class="system-name">Stripe</div>
+                                <div class="system-role">Payment Processing</div>
+                                <div class="data-arrow right">
+                                    <div class="arrow-label">Payment Transactions</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lateral Systems (Expenses) -->
+                        <div class="integration-group lateral-top">
+                            <div class="system-node">
+                                    <div class="system-name">Bill.com</div>
+                                <div class="system-role">Accounts Payable</div>
+                                <div class="data-arrow down">
+                                    <div class="arrow-label">AP Transactions</div>
+                                </div>
+                            </div>
+
+                            <div class="system-node">
+                                    <div class="system-name">Expensify</div>
+                                <div class="system-role">Expense Management</div>
+                                <div class="data-arrow down">
+                                    <div class="arrow-label">Expense Reports</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payroll System -->
+                        <div class="integration-group lateral-bottom">
+                            <div class="system-node">
+                                    <div class="system-name">Gusto</div>
+                                <div class="system-role">Payroll & HR</div>
+                                <div class="data-arrow up">
+                                    <div class="arrow-label">Payroll Data</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Banking -->
+                        <div class="integration-group banking">
+                            <div class="system-node">
+                                    <div class="system-name">Plaid</div>
+                                <div class="system-role">Bank Connectivity</div>
+                                <div class="data-arrow left">
+                                    <div class="arrow-label">Bank Transactions</div>
+                                </div>
+                            </div>
+
+                            <div class="system-node">
+                                    <div class="system-name">QuickBooks</div>
+                                <div class="system-role">Secondary Books</div>
+                                <div class="data-arrow left">
+                                    <div class="arrow-label">GL Sync</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Downstream Systems (Reporting) -->
+                        <div class="integration-group downstream">
+                            <div class="system-node">
+                                    <div class="system-name">Tableau</div>
+                                <div class="system-role">Reporting & Analytics</div>
+                                <div class="data-arrow left">
+                                    <div class="arrow-label">Financial Data Export</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dependency View (Critical Path Timeline) -->
+                <div id="dependency" class="sub-tab-content">
+                    <div class="view-description">
+                        <p>Critical path timeline showing task dependencies for monthly close</p>
+                    </div>
+                    <div class="timeline-container">
+                        <!-- Timeline Header -->
+                        <div class="timeline-header">
+                            <div class="timeline-title">Monthly Close Critical Path</div>
+                            <div class="timeline-dates">
+                                <div class="date-marker">Day 1</div>
+                                <div class="date-marker">Day 5</div>
+                                <div class="date-marker">Day 10</div>
+                                <div class="date-marker">Day 15</div>
+                                <div class="date-marker">Day 20</div>
+                                <div class="date-marker">Day 25</div>
+                                <div class="date-marker">Day 30</div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Tracks -->
+                        <div class="timeline-tracks">
+                            <!-- Track 1: AP -->
+                            <div class="timeline-track">
+                                <div class="track-label">
+                                    <span>Accounts Payable</span>
+                                </div>
+                                <div class="track-tasks">
+                                    <div class="task-bar" style="left: 0%; width: 15%;" data-status="complete">
+                                        <div class="task-name">Review Invoices</div>
+                                        <div class="task-duration">Day 1-5</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 16%; width: 15%;" data-status="complete">
+                                        <div class="task-name">Payment Runs</div>
+                                        <div class="task-duration">Day 6-10</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 85%; width: 15%;" data-status="in-progress">
+                                        <div class="task-name">AP Reconciliation</div>
+                                        <div class="task-duration">Day 26-30</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Track 2: AR -->
+                            <div class="timeline-track">
+                                <div class="track-label">
+                                    <span>Accounts Receivable</span>
+                                </div>
+                                <div class="track-tasks">
+                                    <div class="task-bar" style="left: 0%; width: 10%;" data-status="complete">
+                                        <div class="task-name">Generate Invoices</div>
+                                        <div class="task-duration">Day 1-3</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 80%; width: 15%;" data-status="complete">
+                                        <div class="task-name">Record Payments</div>
+                                        <div class="task-duration">Day 25-29</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 96%; width: 4%;" data-status="in-progress">
+                                        <div class="task-name">AR Aging</div>
+                                        <div class="task-duration">Day 30</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Track 3: GL (Critical Path) -->
+                            <div class="timeline-track critical">
+                                <div class="track-label">
+                                    <span>General Ledger</span>
+                                    <span class="critical-badge">Critical Path</span>
+                                </div>
+                                <div class="track-tasks">
+                                    <div class="task-bar" style="left: 0%; width: 84%;" data-status="complete">
+                                        <div class="task-name">Post Journal Entries</div>
+                                        <div class="task-duration">Day 1-27</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 85%; width: 10%;" data-status="complete">
+                                        <div class="task-name">Accruals</div>
+                                        <div class="task-duration">Day 28-29</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 96%; width: 4%;" data-status="in-progress">
+                                        <div class="task-name">GL Review</div>
+                                        <div class="task-duration">Day 30</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Track 4: Bank Rec -->
+                            <div class="timeline-track">
+                                <div class="track-label">
+                                    <span>Bank Reconciliation</span>
+                                </div>
+                                <div class="track-tasks">
+                                    <div class="task-bar" style="left: 84%; width: 6%;" data-status="complete">
+                                        <div class="task-name">Download Statements</div>
+                                        <div class="task-duration">Day 27</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 91%; width: 9%;" data-status="in-progress">
+                                        <div class="task-name">Reconcile Accounts</div>
+                                        <div class="task-duration">Day 28-30</div>
+                                    </div>
+                                    <div class="dependency-arrow" style="left: 95%; top: -60px;">↓</div>
+                                </div>
+                            </div>
+
+                            <!-- Track 5: Reporting -->
+                            <div class="timeline-track">
+                                <div class="track-label">
+                                    <span>Financial Reporting</span>
+                                </div>
+                                <div class="track-tasks">
+                                    <div class="task-bar" style="left: 88%; width: 4%;" data-status="complete">
+                                        <div class="task-name">P&L</div>
+                                        <div class="task-duration">Day 28</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 93%; width: 4%;" data-status="in-progress">
+                                        <div class="task-name">Balance Sheet</div>
+                                        <div class="task-duration">Day 29</div>
+                                    </div>
+                                    <div class="task-bar" style="left: 98%; width: 2%;" data-status="not-started">
+                                        <div class="task-name">Cash Flow</div>
+                                        <div class="task-duration">Day 30</div>
+                                    </div>
+                                    <div class="dependency-arrow" style="left: 93%; top: -60px;">↓</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="timeline-legend">
+                            <div class="legend-item">
+                                <div class="legend-box complete"></div>
+                                <span>Complete</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box in-progress"></div>
+                                <span>In Progress</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-box not-started"></div>
+                                <span>Not Started</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="dependency-symbol">↓</span>
+                                <span>Dependency</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Software Stack Status Tab -->
+            <div id="software-stack" class="tab-content">
+                <div class="content-header">
+                    <h2>Software Stack Status</h2>
+                    <p class="subtitle">Real-time operational status of financial tools</p>
+                </div>
+                <div class="status-grid">
+                    <!-- NetSuite ERP -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>NetSuite ERP</h3>
+                                <div class="tool-category">Core Financial System</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- Bill.com -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Bill.com</h3>
+                                <div class="tool-category">Accounts Payable</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- Stripe -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Stripe</h3>
+                                <div class="tool-category">Payment Processing</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- Gusto Payroll -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Gusto</h3>
+                                <div class="tool-category">Payroll & HR</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- Plaid -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Plaid</h3>
+                                <div class="tool-category">Bank Connectivity</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot offline"></span>
+                            <span class="status-text offline">Connection Issue</span>
+                        </div>
+                    </div>
+
+                    <!-- Expensify -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Expensify</h3>
+                                <div class="tool-category">Expense Management</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- QuickBooks Online -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>QuickBooks Online</h3>
+                                <div class="tool-category">Accounting</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+
+                    <!-- Tableau -->
+                    <div class="status-card">
+                        <div class="status-card-left">
+                            <div class="tool-info">
+                                <h3>Tableau</h3>
+                                <div class="tool-category">Financial Reporting & Analytics</div>
+                            </div>
+                        </div>
+                        <div class="status-card-right">
+                            <span class="status-dot online"></span>
+                            <span class="status-text online">Operational</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Close Tasks Tab -->
+            <div id="monthly-close" class="tab-content">
+                <div class="content-header">
+                    <h2>Monthly Close Status Matrix</h2>
+                    <p class="subtitle">2025 Year-over-Year Progress Tracker</p>
+                    <div class="status-legend">
+                        <div class="legend-status">
+                            <span class="status-indicator-dot complete"></span>
+                            <span>Complete</span>
+                        </div>
+                        <div class="legend-status">
+                            <span class="status-indicator-dot in-progress"></span>
+                            <span>In Progress</span>
+                        </div>
+                        <div class="legend-status">
+                            <span class="status-indicator-dot blocked"></span>
+                            <span>Blocked/Issue</span>
+                        </div>
+                        <div class="legend-status">
+                            <span class="status-indicator-dot not-started"></span>
+                            <span>Not Started</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="close-matrix-container">
+                    <!-- Summary Row -->
+                    <div class="matrix-summary">
+                        <div class="summary-label">Overall Monthly Close</div>
+                        <div class="summary-months">
+                            <div class="summary-month">
+                                <div class="month-name">Jan</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Feb</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Mar</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Apr</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">May</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Jun</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Jul</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Aug</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Sep</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Oct</div>
+                                <div class="completion-badge complete">100%</div>
+                            </div>
+                            <div class="summary-month">
+                                <div class="month-name">Nov</div>
+                                <div class="completion-badge in-progress">85%</div>
+                            </div>
+                            <div class="summary-month current">
+                                <div class="month-name">Dec</div>
+                                <div class="completion-badge in-progress">65%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Status Matrix Table -->
+                    <div class="status-matrix">
+                        <!-- Header Row -->
+                        <div class="matrix-header">
+                            <div class="task-name-column">Task</div>
+                            <div class="month-column">Jan</div>
+                            <div class="month-column">Feb</div>
+                            <div class="month-column">Mar</div>
+                            <div class="month-column">Apr</div>
+                            <div class="month-column">May</div>
+                            <div class="month-column">Jun</div>
+                            <div class="month-column">Jul</div>
+                            <div class="month-column">Aug</div>
+                            <div class="month-column">Sep</div>
+                            <div class="month-column">Oct</div>
+                            <div class="month-column">Nov</div>
+                            <div class="month-column current-month">Dec</div>
+                        </div>
+
+                        <!-- Accounts Payable Section -->
+                        <div class="process-section-header">
+                            <span>Accounts Payable</span>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Review and approve all vendor invoices</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="ap-review-invoices" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Process payment runs</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="ap-payment-runs" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Reconcile AP aging report</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ap-aging" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator in-progress" data-task="ap-aging" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator in-progress" data-task="ap-aging" data-month="dec"></span></div>
+                        </div>
+
+                        <!-- Accounts Receivable Section -->
+                        <div class="process-section-header">
+                            <span>Accounts Receivable</span>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Generate and send invoices</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-invoices" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="ar-invoices" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Record customer payments</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-payments" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="ar-payments" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Review AR aging report</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="ar-aging" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator in-progress" data-task="ar-aging" data-month="dec"></span></div>
+                        </div>
+
+                        <!-- General Ledger Section -->
+                        <div class="process-section-header">
+                            <span>General Ledger</span>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Post all journal entries</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-entries" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="gl-entries" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Record month-end accruals</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-accruals" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="gl-accruals" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Review GL account balances</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="gl-review" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator in-progress" data-task="gl-review" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator in-progress" data-task="gl-review" data-month="dec"></span></div>
+                        </div>
+
+                        <!-- Bank Reconciliation Section -->
+                        <div class="process-section-header">
+                            <span>Bank Reconciliation</span>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Download bank statements</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-download" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="bank-download" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Reconcile operating account</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="bank-operating" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator blocked" data-task="bank-operating" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator in-progress" data-task="bank-operating" data-month="dec"></span></div>
+                        </div>
+
+                        <!-- Financial Reporting Section -->
+                        <div class="process-section-header">
+                            <span>Financial Reporting</span>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Generate P&L</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-pl" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator complete" data-task="report-pl" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Generate Balance Sheet</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-bs" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator in-progress" data-task="report-bs" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Prepare cash flow statement</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-cf" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator in-progress" data-task="report-cf" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator not-started" data-task="report-cf" data-month="dec"></span></div>
+                        </div>
+
+                        <div class="matrix-row">
+                            <div class="task-name-column">Management reporting package</div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="jan"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="feb"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="mar"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="apr"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="may"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="jun"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="jul"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="aug"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="sep"></span></div>
+                            <div class="month-column"><span class="status-indicator complete" data-task="report-mgmt" data-month="oct"></span></div>
+                            <div class="month-column"><span class="status-indicator in-progress" data-task="report-mgmt" data-month="nov"></span></div>
+                            <div class="month-column current-month"><span class="status-indicator not-started" data-task="report-mgmt" data-month="dec"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issues Tab -->
+            <div id="issues" class="tab-content">
+                <div class="content-header">
+                    <h2>Issues & Blockers</h2>
+                    <p class="subtitle">Track and resolve finance operations issues</p>
+                    <div class="filters">
+                        <button class="filter-chip active">All (5)</button>
+                        <button class="filter-chip">Critical (2)</button>
+                        <button class="filter-chip">High (2)</button>
+                        <button class="filter-chip">Medium (1)</button>
+                    </div>
+                </div>
+                <div class="issues-list">
+                    <!-- Critical Issue 1 -->
+                    <div class="issue-card critical">
+                        <div class="issue-header">
+                            <div class="issue-title-section">
+                                <span class="issue-priority critical">Critical</span>
+                                <h3 class="issue-title">Bank reconciliation discrepancy - $15,000 variance</h3>
+                            </div>
+                        </div>
+                        <p class="issue-description">
+                            Main operating account shows a $15,000 variance between bank statement and GL. Needs immediate investigation to identify missing transactions or errors.
+                        </p>
+                        <div class="issue-meta">
+                            <div class="issue-meta-item">
+                                <span>Assigned: Sarah Chen</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Process: Bank Reconciliation</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Status: In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Critical Issue 2 -->
+                    <div class="issue-card critical">
+                        <div class="issue-header">
+                            <div class="issue-title-section">
+                                <span class="issue-priority critical">Critical</span>
+                                <h3 class="issue-title">Plaid connection down - bank feed interrupted</h3>
+                            </div>
+                        </div>
+                        <p class="issue-description">
+                            Plaid API connection is failing since Dec 26. Automatic bank transactions are not syncing. Manual import required until resolved.
+                        </p>
+                        <div class="issue-meta">
+                            <div class="issue-meta-item">
+                                <span>Assigned: IT Support</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Tool: Plaid Integration</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Status: Open</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- High Priority Issue 1 -->
+                    <div class="issue-card high">
+                        <div class="issue-header">
+                            <div class="issue-title-section">
+                                <span class="issue-priority high">High</span>
+                                <h3 class="issue-title">December revenue recognition incomplete</h3>
+                            </div>
+                        </div>
+                        <p class="issue-description">
+                            3 large customer contracts need review for proper revenue recognition timing. Waiting on legal approval for contract amendments.
+                        </p>
+                        <div class="issue-meta">
+                            <div class="issue-meta-item">
+                                <span>Assigned: Revenue Team</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Process: Revenue Recognition</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Status: Blocked</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- High Priority Issue 2 -->
+                    <div class="issue-card high">
+                        <div class="issue-header">
+                            <div class="issue-title-section">
+                                <span class="issue-priority high">High</span>
+                                <h3 class="issue-title">Accrued payroll calculation error</h3>
+                            </div>
+                        </div>
+                        <p class="issue-description">
+                            Payroll accrual calculation appears to be understated by approximately $8K. Need to verify PTO balances and commission calculations.
+                        </p>
+                        <div class="issue-meta">
+                            <div class="issue-meta-item">
+                                <span>Assigned: Payroll Team</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Process: Payroll</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Status: In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medium Priority Issue -->
+                    <div class="issue-card medium">
+                        <div class="issue-header">
+                            <div class="issue-title-section">
+                                <span class="issue-priority medium">Medium</span>
+                                <h3 class="issue-title">Expense report backlog</h3>
+                            </div>
+                        </div>
+                        <p class="issue-description">
+                            12 expense reports from November still pending approval in Expensify. Total amount: $4,200. Need manager approval before month close.
+                        </p>
+                        <div class="issue-meta">
+                            <div class="issue-meta-item">
+                                <span>Assigned: Manager Team</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Tool: Expensify</span>
+                            </div>
+                            <div class="issue-meta-item">
+                                <span>Status: Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approvals Tab -->
+            <div id="approvals" class="tab-content">
+                <div class="content-header">
+                    <h2>Pending Approvals</h2>
+                    <p class="subtitle">Human-in-the-loop review queue</p>
+                </div>
+                <div class="approvals-list">
+                    <!-- Vendor Payment Approval -->
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <span class="approval-badge">Payment Approval</span>
+                        </div>
+                        <h3 class="approval-title">Vendor Payment Batch #2512-045</h3>
+                        <p class="approval-details">
+                            Payment run for 24 vendor invoices scheduled for December 30, 2025
+                        </p>
+                        <div class="approval-amount">$127,450.82</div>
+                        <p class="approval-requester">Requested by: Finance Team • Dec 27, 2025</p>
+                        <div class="approval-actions">
+                            <button class="approval-btn approve-btn">Approve</button>
+                            <button class="approval-btn reject-btn">Reject</button>
+                            <button class="approval-btn review-btn">Review Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Journal Entry Approval -->
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <span class="approval-badge">Journal Entry</span>
+                        </div>
+                        <h3 class="approval-title">Month-End Accrual Adjustment</h3>
+                        <p class="approval-details">
+                            Accrual adjustment for prepaid expenses and deferred revenue recognition
+                        </p>
+                        <div class="approval-amount">$45,200.00</div>
+                        <p class="approval-requester">Requested by: Controller • Dec 28, 2025</p>
+                        <div class="approval-actions">
+                            <button class="approval-btn approve-btn">Approve</button>
+                            <button class="approval-btn reject-btn">Reject</button>
+                            <button class="approval-btn review-btn">Review Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Budget Override Approval -->
+                    <div class="approval-card">
+                        <div class="approval-header">
+                            <span class="approval-badge">Budget Override</span>
+                        </div>
+                        <h3 class="approval-title">Marketing Department Budget Reallocation</h3>
+                        <p class="approval-details">
+                            Request to reallocate $25K from Q1 budget to December for year-end campaign
+                        </p>
+                        <div class="approval-amount">$25,000.00</div>
+                        <p class="approval-requester">Requested by: Marketing Director • Dec 26, 2025</p>
+                        <div class="approval-actions">
+                            <button class="approval-btn approve-btn">Approve</button>
+                            <button class="approval-btn reject-btn">Reject</button>
+                            <button class="approval-btn review-btn">Review Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        </div> <!-- Close app-body -->
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div class="task-modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Task Details</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
