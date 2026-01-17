@@ -1,13 +1,37 @@
-// CFO Platform JavaScript - Interactive Functionality
+// ENGI finance JavaScript - Interactive Functionality
 
 document.addEventListener('DOMContentLoaded', function() {
+    initializeSidebarToggle();
     initializeTabs();
     initializeSubTabs();
     initializeFilters();
     initializeApprovalButtons();
     initializeProcessExpand();
     initializeMatrixCells();
+    initializeCashFlowDiagram();
 });
+
+// Sidebar Toggle Functionality
+function initializeSidebarToggle() {
+    const toggleButton = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.sidebar-navigation');
+
+    // Check localStorage for saved state
+    const sidebarState = localStorage.getItem('sidebarCollapsed');
+    if (sidebarState === 'true') {
+        sidebar.classList.add('collapsed');
+        toggleButton.classList.add('active');
+    }
+
+    toggleButton.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed');
+        toggleButton.classList.toggle('active');
+
+        // Save state to localStorage
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        localStorage.setItem('sidebarCollapsed', isCollapsed);
+    });
+}
 
 // Sidebar Navigation System
 function initializeTabs() {
@@ -514,6 +538,205 @@ function initializeMatrixCells() {
     });
 }
 
+// Cash Flow Diagram Functions
+function initializeCashFlowDiagram() {
+    // Generate SVG connections
+    generateFlowConnections();
+
+    // Initialize node interactions
+    initializeFlowNodeInteractions();
+}
+
+function generateFlowConnections() {
+    const svg = document.querySelector('.flow-connections');
+    if (!svg) return;
+
+    // Define connection paths with coordinates
+    // Format: { from: [x, y], to: [x, y], type: 'cash-in' or 'cash-out' }
+    const connections = [
+        // Cash inflows (sources to bank)
+        // Customer Payments (100+180=280, 80+35=115) to Bank (500, 220+60=280)
+        { from: [280, 115], to: [500, 280], type: 'cash-in' },
+
+        // New Revenue (280, 220+35=255) to Bank (500, 280)
+        { from: [280, 255], to: [500, 280], type: 'cash-in' },
+
+        // Other Income (280, 360+35=395) to Bank (500, 280)
+        { from: [280, 395], to: [500, 280], type: 'cash-in' },
+
+        // Cash outflows (bank to uses)
+        // Bank (500+220=720, 220+25=245) to Vendor Payments (900, 60+35=95)
+        { from: [720, 245], to: [900, 95], type: 'cash-out' },
+
+        // Bank (720, 280) to Payroll (900, 180+35=215)
+        { from: [720, 280], to: [900, 215], type: 'cash-out' },
+
+        // Bank (720, 315) to Operating Expenses (900, 300+35=335)
+        { from: [720, 315], to: [900, 335], type: 'cash-out' },
+
+        // Bank (720, 350) to Capital Expenditures (900, 420+35=455)
+        { from: [720, 350], to: [900, 455], type: 'cash-out' }
+    ];
+
+    // Create SVG path elements
+    connections.forEach((conn, index) => {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+        // Calculate control points for Bezier curve
+        const x1 = conn.from[0];
+        const y1 = conn.from[1];
+        const x2 = conn.to[0];
+        const y2 = conn.to[1];
+
+        // Use horizontal control points for smooth curve
+        const cx1 = x1 + (x2 - x1) * 0.5;
+        const cy1 = y1;
+        const cx2 = x1 + (x2 - x1) * 0.5;
+        const cy2 = y2;
+
+        // Create path with cubic Bezier curve
+        const d = `M ${x1} ${y1} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${x2} ${y2}`;
+
+        path.setAttribute('d', d);
+        path.setAttribute('class', `flow-path ${conn.type}`);
+
+        svg.appendChild(path);
+    });
+}
+
+function initializeFlowNodeInteractions() {
+    const flowNodes = document.querySelectorAll('.flow-node');
+    const modal = document.getElementById('taskModal');
+    const modalClose = document.getElementById('modalClose');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    if (!modal) return;
+
+    // Define detailed data for each node
+    const nodeDetails = {
+        'customer-payments': {
+            title: 'Customer Payments',
+            amount: '+$650K',
+            breakdown: [
+                { label: 'AR Collections', amount: '$420K' },
+                { label: 'Credit Card Payments', amount: '$180K' },
+                { label: 'Wire Transfers', amount: '$50K' }
+            ],
+            notes: 'Cash received from customers for outstanding invoices and new sales.'
+        },
+        'new-revenue': {
+            title: 'New Revenue',
+            amount: '+$320K',
+            breakdown: [
+                { label: 'Subscription Revenue', amount: '$180K' },
+                { label: 'Service Revenue', amount: '$100K' },
+                { label: 'Product Sales', amount: '$40K' }
+            ],
+            notes: 'New cash from current month sales and subscriptions.'
+        },
+        'other-income': {
+            title: 'Other Income',
+            amount: '+$150K',
+            breakdown: [
+                { label: 'Interest Income', amount: '$50K' },
+                { label: 'Refunds & Rebates', amount: '$60K' },
+                { label: 'Miscellaneous', amount: '$40K' }
+            ],
+            notes: 'Non-operating cash inflows including interest and refunds.'
+        },
+        'vendor-payments': {
+            title: 'Vendor Payments',
+            amount: '-$480K',
+            breakdown: [
+                { label: 'Supplier Invoices', amount: '$320K' },
+                { label: 'Service Providers', amount: '$100K' },
+                { label: 'Utilities', amount: '$60K' }
+            ],
+            notes: 'Payments to vendors for goods and services received.'
+        },
+        'payroll': {
+            title: 'Payroll',
+            amount: '-$320K',
+            breakdown: [
+                { label: 'Salaries & Wages', amount: '$250K' },
+                { label: 'Benefits', amount: '$50K' },
+                { label: 'Payroll Taxes', amount: '$20K' }
+            ],
+            notes: 'Employee compensation including salaries, benefits, and payroll taxes.'
+        },
+        'operating-expenses': {
+            title: 'Operating Expenses',
+            amount: '-$200K',
+            breakdown: [
+                { label: 'Rent', amount: '$80K' },
+                { label: 'Software & Tools', amount: '$70K' },
+                { label: 'Marketing', amount: '$50K' }
+            ],
+            notes: 'General operating expenses including rent, software, and marketing.'
+        },
+        'capital-expenditures': {
+            title: 'Capital Expenditures',
+            amount: '-$150K',
+            breakdown: [
+                { label: 'Equipment Purchases', amount: '$100K' },
+                { label: 'Infrastructure', amount: '$50K' }
+            ],
+            notes: 'Investments in long-term assets and infrastructure.'
+        },
+        'bank-account': {
+            title: 'Bank Account',
+            amount: 'Net Change: -$30K',
+            breakdown: [
+                { label: 'Starting Balance', amount: '$2.1M' },
+                { label: 'Total Cash In', amount: '+$1,120K' },
+                { label: 'Total Cash Out', amount: '-$1,150K' },
+                { label: 'Ending Balance', amount: '$2.07M' }
+            ],
+            notes: 'Main operating account showing cash flow for the month.'
+        }
+    };
+
+    // Add click handlers to all flow nodes
+    flowNodes.forEach(node => {
+        node.addEventListener('click', function(e) {
+            const nodeId = this.getAttribute('data-node');
+            const details = nodeDetails[nodeId];
+
+            if (!details) return;
+
+            // Set modal title
+            modalTitle.textContent = details.title;
+
+            // Build modal content
+            let breakdownHTML = details.breakdown.map(item =>
+                `<div class="modal-info-row">
+                    <span class="modal-label">${item.label}:</span>
+                    <span class="modal-value">${item.amount}</span>
+                </div>`
+            ).join('');
+
+            modalBody.innerHTML = `
+                <div class="modal-info-row">
+                    <span class="modal-label">Amount:</span>
+                    <span class="modal-value" style="font-weight: 700; font-size: 1.25rem;">${details.amount}</span>
+                </div>
+                <div style="margin: var(--spacing-md) 0; padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                    <h4 style="font-size: var(--font-size-sm); font-weight: 600; margin-bottom: var(--spacing-sm); color: var(--text-primary);">Breakdown</h4>
+                    ${breakdownHTML}
+                </div>
+                <div class="modal-info-row">
+                    <span class="modal-label">Notes:</span>
+                    <span class="modal-value">${details.notes}</span>
+                </div>
+            `;
+
+            // Show modal
+            modal.classList.add('active');
+        });
+    });
+}
+
 // Console welcome message
-console.log('%c CFO Platform ', 'background: #0066FF; color: white; padding: 8px 16px; border-radius: 4px; font-size: 14px; font-weight: bold;');
+console.log('%c ENGI finance ', 'background: #0066FF; color: white; padding: 8px 16px; border-radius: 4px; font-size: 14px; font-weight: bold;');
 console.log('Interactive prototype loaded successfully!');

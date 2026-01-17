@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CFO Platform - Finance Operations Dashboard</title>
+    <title>ENGI finance - Finance Operations Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,10 +11,20 @@
         <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1 class="logo">CFO Platform</h1>
+                <div class="header-left">
+                    <button class="hamburger-menu" id="sidebarToggle" aria-label="Toggle sidebar">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                    <h1 class="logo">ENGI finance</h1>
+                </div>
                 <div class="header-actions">
                     <div class="notification-bell">
-                        <span class="bell-icon">Notifications</span>
+                        <svg class="bell-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 6.66667C15 5.34058 14.4732 4.06881 13.5355 3.13113C12.5979 2.19345 11.3261 1.66667 10 1.66667C8.67392 1.66667 7.40215 2.19345 6.46447 3.13113C5.52678 4.06881 5 5.34058 5 6.66667C5 12.5 2.5 14.1667 2.5 14.1667H17.5C17.5 14.1667 15 12.5 15 6.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M11.4417 17.5C11.2952 17.7526 11.0849 17.9622 10.8319 18.1079C10.5789 18.2537 10.292 18.3304 10 18.3304C9.70802 18.3304 9.42115 18.2537 9.16814 18.1079C8.91513 17.9622 8.70484 17.7526 8.55835 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                         <span class="notification-badge">3</span>
                     </div>
                     <div class="user-profile">
@@ -28,7 +38,7 @@
             <!-- Sidebar Navigation -->
             <nav class="sidebar-navigation">
                 <button class="sidebar-button active" data-tab="finance-dashboard">
-                    <span class="sidebar-label">Structure Map</span>
+                    <span class="sidebar-label">Structure Maps</span>
                 </button>
                 <button class="sidebar-button" data-tab="software-stack">
                     <span class="sidebar-label">Software Stack</span>
@@ -51,7 +61,7 @@
             <!-- Finance Function Dashboard Tab -->
             <div id="finance-dashboard" class="tab-content active">
                 <div class="content-header">
-                    <h2>Structure Map</h2>
+                    <h2>Structure Maps</h2>
                     <p class="subtitle">Visualize your finance operations from different perspectives</p>
                 </div>
 
@@ -59,117 +69,110 @@
                 <div class="sub-tabs">
                     <button class="sub-tab active" data-subtab="cash-flow">Cash Flow</button>
                     <button class="sub-tab" data-subtab="data-flow">Data Flow</button>
-                    <button class="sub-tab" data-subtab="dependency">Dependency</button>
                 </div>
 
-                <!-- Cash Flow View (Waterfall Chart) -->
+                <!-- Cash Flow View (Flow Diagram) -->
                 <div id="cash-flow" class="sub-tab-content active">
                     <div class="view-description">
-                        <p>Monthly cash flow waterfall showing sources and uses of cash</p>
+                        <p>Interactive cash flow diagram showing sources and uses of cash</p>
                     </div>
-                    <div class="waterfall-chart">
-                        <div class="waterfall-bars">
-                            <!-- Starting Balance -->
-                            <div class="waterfall-item start">
-                                <div class="waterfall-bar positive" style="height: 240px;">
-                                    <div class="bar-label">$2.1M</div>
-                                </div>
-                                <div class="waterfall-label">Starting<br>Balance</div>
+
+                    <!-- Flow Diagram Canvas -->
+                    <div class="flow-diagram-canvas">
+                        <!-- SVG Layer for Connection Arrows -->
+                        <svg class="flow-connections" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <!-- Arrow markers -->
+                                <marker id="arrowhead-green" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#10b981" />
+                                </marker>
+                                <marker id="arrowhead-red" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <polygon points="0 0, 10 3, 0 6" fill="#ef4444" />
+                                </marker>
+                            </defs>
+                            <!-- Connection paths will be generated by JavaScript -->
+                        </svg>
+
+                        <!-- Flow Nodes Container -->
+                        <div class="flow-nodes">
+                            <!-- Cash Sources (Left Column) -->
+                            <div class="flow-node cash-source" data-node="customer-payments" style="left: 100px; top: 80px;">
+                                <div class="node-title">Customer Payments</div>
+                                <div class="node-amount positive">+$650K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <!-- Cash In Items -->
-                            <div class="waterfall-item increase">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar positive" style="height: 150px;">
-                                    <div class="bar-label">+$650K</div>
-                                </div>
-                                <div class="waterfall-label">Customer<br>Payments</div>
+                            <div class="flow-node cash-source" data-node="new-revenue" style="left: 100px; top: 220px;">
+                                <div class="node-title">New Revenue</div>
+                                <div class="node-amount positive">+$320K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <div class="waterfall-item increase">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar positive" style="height: 80px;">
-                                    <div class="bar-label">+$320K</div>
-                                </div>
-                                <div class="waterfall-label">New<br>Revenue</div>
+                            <div class="flow-node cash-source" data-node="other-income" style="left: 100px; top: 360px;">
+                                <div class="node-title">Other Income</div>
+                                <div class="node-amount positive">+$150K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <div class="waterfall-item increase">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar positive" style="height: 40px;">
-                                    <div class="bar-label">+$150K</div>
+                            <!-- Central Bank Account -->
+                            <div class="flow-node central-account" data-node="bank-account" style="left: 500px; top: 220px;">
+                                <div class="node-title">Bank Account</div>
+                                <div class="node-balance">
+                                    <div class="balance-row">
+                                        <span>Starting:</span>
+                                        <span>$2.1M</span>
+                                    </div>
+                                    <div class="balance-row">
+                                        <span>Ending:</span>
+                                        <span>$2.07M</span>
+                                    </div>
+                                    <div class="balance-row net">
+                                        <span>Net Change:</span>
+                                        <span class="negative">-$30K</span>
+                                    </div>
                                 </div>
-                                <div class="waterfall-label">Other<br>Income</div>
                             </div>
 
-                            <!-- Cash Out Items -->
-                            <div class="waterfall-item decrease">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar negative" style="height: 120px;">
-                                    <div class="bar-label">-$480K</div>
-                                </div>
-                                <div class="waterfall-label">Vendor<br>Payments</div>
+                            <!-- Cash Uses (Right Column) -->
+                            <div class="flow-node cash-use" data-node="vendor-payments" style="left: 900px; top: 60px;">
+                                <div class="node-title">Vendor Payments</div>
+                                <div class="node-amount negative">-$480K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <div class="waterfall-item decrease">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar negative" style="height: 80px;">
-                                    <div class="bar-label">-$320K</div>
-                                </div>
-                                <div class="waterfall-label">Payroll</div>
+                            <div class="flow-node cash-use" data-node="payroll" style="left: 900px; top: 180px;">
+                                <div class="node-title">Payroll</div>
+                                <div class="node-amount negative">-$320K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <div class="waterfall-item decrease">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar negative" style="height: 50px;">
-                                    <div class="bar-label">-$200K</div>
-                                </div>
-                                <div class="waterfall-label">Operating<br>Expenses</div>
+                            <div class="flow-node cash-use" data-node="operating-expenses" style="left: 900px; top: 300px;">
+                                <div class="node-title">Operating Expenses</div>
+                                <div class="node-amount negative">-$200K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
 
-                            <div class="waterfall-item decrease">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar negative" style="height: 40px;">
-                                    <div class="bar-label">-$150K</div>
-                                </div>
-                                <div class="waterfall-label">Capital<br>Expenditures</div>
-                            </div>
-
-                            <!-- Ending Balance -->
-                            <div class="waterfall-item end">
-                                <div class="waterfall-connector"></div>
-                                <div class="waterfall-bar total" style="height: 240px;">
-                                    <div class="bar-label">$2.07M</div>
-                                </div>
-                                <div class="waterfall-label">Ending<br>Balance</div>
+                            <div class="flow-node cash-use" data-node="capital-expenditures" style="left: 900px; top: 420px;">
+                                <div class="node-title">Capital Expenditures</div>
+                                <div class="node-amount negative">-$150K</div>
+                                <button class="node-expand-btn">Details</button>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Cash Flow Summary -->
-                        <div class="cashflow-summary">
-                            <div class="summary-section">
-                                <h4>Cash In</h4>
-                                <div class="summary-value positive">+$1,120K</div>
-                                <div class="summary-breakdown">
-                                    <div>Customer Payments: $650K</div>
-                                    <div>New Revenue: $320K</div>
-                                    <div>Other Income: $150K</div>
-                                </div>
-                            </div>
-                            <div class="summary-section">
-                                <h4>Cash Out</h4>
-                                <div class="summary-value negative">-$1,150K</div>
-                                <div class="summary-breakdown">
-                                    <div>Vendor Payments: $480K</div>
-                                    <div>Payroll: $320K</div>
-                                    <div>Operating Expenses: $200K</div>
-                                    <div>Capital Expenditures: $150K</div>
-                                </div>
-                            </div>
-                            <div class="summary-section">
-                                <h4>Net Change</h4>
-                                <div class="summary-value negative">-$30K</div>
-                            </div>
+                    <!-- Flow Summary -->
+                    <div class="flow-summary">
+                        <div class="summary-section">
+                            <h4>Cash In</h4>
+                            <div class="summary-value positive">+$1,120K</div>
+                        </div>
+                        <div class="summary-section">
+                            <h4>Cash Out</h4>
+                            <div class="summary-value negative">-$1,150K</div>
+                        </div>
+                        <div class="summary-section">
+                            <h4>Net Change</h4>
+                            <div class="summary-value negative">-$30K</div>
                         </div>
                     </div>
                 </div>
@@ -258,274 +261,269 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Dependency View (Critical Path Timeline) -->
-                <div id="dependency" class="sub-tab-content">
-                    <div class="view-description">
-                        <p>Critical path timeline showing task dependencies for monthly close</p>
-                    </div>
-                    <div class="timeline-container">
-                        <!-- Timeline Header -->
-                        <div class="timeline-header">
-                            <div class="timeline-title">Monthly Close Critical Path</div>
-                            <div class="timeline-dates">
-                                <div class="date-marker">Day 1</div>
-                                <div class="date-marker">Day 5</div>
-                                <div class="date-marker">Day 10</div>
-                                <div class="date-marker">Day 15</div>
-                                <div class="date-marker">Day 20</div>
-                                <div class="date-marker">Day 25</div>
-                                <div class="date-marker">Day 30</div>
-                            </div>
-                        </div>
-
-                        <!-- Timeline Tracks -->
-                        <div class="timeline-tracks">
-                            <!-- Track 1: AP -->
-                            <div class="timeline-track">
-                                <div class="track-label">
-                                    <span>Accounts Payable</span>
-                                </div>
-                                <div class="track-tasks">
-                                    <div class="task-bar" style="left: 0%; width: 15%;" data-status="complete">
-                                        <div class="task-name">Review Invoices</div>
-                                        <div class="task-duration">Day 1-5</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 16%; width: 15%;" data-status="complete">
-                                        <div class="task-name">Payment Runs</div>
-                                        <div class="task-duration">Day 6-10</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 85%; width: 15%;" data-status="in-progress">
-                                        <div class="task-name">AP Reconciliation</div>
-                                        <div class="task-duration">Day 26-30</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Track 2: AR -->
-                            <div class="timeline-track">
-                                <div class="track-label">
-                                    <span>Accounts Receivable</span>
-                                </div>
-                                <div class="track-tasks">
-                                    <div class="task-bar" style="left: 0%; width: 10%;" data-status="complete">
-                                        <div class="task-name">Generate Invoices</div>
-                                        <div class="task-duration">Day 1-3</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 80%; width: 15%;" data-status="complete">
-                                        <div class="task-name">Record Payments</div>
-                                        <div class="task-duration">Day 25-29</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 96%; width: 4%;" data-status="in-progress">
-                                        <div class="task-name">AR Aging</div>
-                                        <div class="task-duration">Day 30</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Track 3: GL (Critical Path) -->
-                            <div class="timeline-track critical">
-                                <div class="track-label">
-                                    <span>General Ledger</span>
-                                    <span class="critical-badge">Critical Path</span>
-                                </div>
-                                <div class="track-tasks">
-                                    <div class="task-bar" style="left: 0%; width: 84%;" data-status="complete">
-                                        <div class="task-name">Post Journal Entries</div>
-                                        <div class="task-duration">Day 1-27</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 85%; width: 10%;" data-status="complete">
-                                        <div class="task-name">Accruals</div>
-                                        <div class="task-duration">Day 28-29</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 96%; width: 4%;" data-status="in-progress">
-                                        <div class="task-name">GL Review</div>
-                                        <div class="task-duration">Day 30</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Track 4: Bank Rec -->
-                            <div class="timeline-track">
-                                <div class="track-label">
-                                    <span>Bank Reconciliation</span>
-                                </div>
-                                <div class="track-tasks">
-                                    <div class="task-bar" style="left: 84%; width: 6%;" data-status="complete">
-                                        <div class="task-name">Download Statements</div>
-                                        <div class="task-duration">Day 27</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 91%; width: 9%;" data-status="in-progress">
-                                        <div class="task-name">Reconcile Accounts</div>
-                                        <div class="task-duration">Day 28-30</div>
-                                    </div>
-                                    <div class="dependency-arrow" style="left: 95%; top: -60px;">↓</div>
-                                </div>
-                            </div>
-
-                            <!-- Track 5: Reporting -->
-                            <div class="timeline-track">
-                                <div class="track-label">
-                                    <span>Financial Reporting</span>
-                                </div>
-                                <div class="track-tasks">
-                                    <div class="task-bar" style="left: 88%; width: 4%;" data-status="complete">
-                                        <div class="task-name">P&L</div>
-                                        <div class="task-duration">Day 28</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 93%; width: 4%;" data-status="in-progress">
-                                        <div class="task-name">Balance Sheet</div>
-                                        <div class="task-duration">Day 29</div>
-                                    </div>
-                                    <div class="task-bar" style="left: 98%; width: 2%;" data-status="not-started">
-                                        <div class="task-name">Cash Flow</div>
-                                        <div class="task-duration">Day 30</div>
-                                    </div>
-                                    <div class="dependency-arrow" style="left: 93%; top: -60px;">↓</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Legend -->
-                        <div class="timeline-legend">
-                            <div class="legend-item">
-                                <div class="legend-box complete"></div>
-                                <span>Complete</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-box in-progress"></div>
-                                <span>In Progress</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-box not-started"></div>
-                                <span>Not Started</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="dependency-symbol">↓</span>
-                                <span>Dependency</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Software Stack Status Tab -->
             <div id="software-stack" class="tab-content">
                 <div class="content-header">
-                    <h2>Software Stack Status</h2>
-                    <p class="subtitle">Real-time operational status of financial tools</p>
+                    <h2>Software Stack Overview</h2>
+                    <p class="subtitle">Functionaliteiten per geïmplementeerd platform</p>
+                    <div class="stack-legend">
+                        <div class="legend-item">
+                            <span class="feature-dot has"></span>
+                            <span>Beschikbaar</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="feature-dot lacks"></span>
+                            <span>Niet beschikbaar</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="status-grid">
-                    <!-- NetSuite ERP -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>NetSuite ERP</h3>
-                                <div class="tool-category">Core Financial System</div>
-                            </div>
+
+                <div class="stack-cards-container">
+                    <!-- ERP Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>ERP</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Web-based</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mobile App</div></th>
+                                    <th class="feature-col"><div class="feature-header">API</div></th>
+                                    <th class="feature-col"><div class="feature-header">Integraties</div></th>
+                                    <th class="feature-col"><div class="feature-header">Multi-currency</div></th>
+                                    <th class="feature-col"><div class="feature-header">Real-time</div></th>
+                                    <th class="feature-col"><div class="feature-header">Workflows</div></th>
+                                    <th class="feature-col"><div class="feature-header">Reports</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">NetSuite</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Bill.com -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Bill.com</h3>
-                                <div class="tool-category">Accounts Payable</div>
-                            </div>
+                    <!-- Accounting Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>Accounting</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Web-based</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mobile App</div></th>
+                                    <th class="feature-col"><div class="feature-header">API</div></th>
+                                    <th class="feature-col"><div class="feature-header">Integraties</div></th>
+                                    <th class="feature-col"><div class="feature-header">Multi-currency</div></th>
+                                    <th class="feature-col"><div class="feature-header">Real-time</div></th>
+                                    <th class="feature-col"><div class="feature-header">Workflows</div></th>
+                                    <th class="feature-col"><div class="feature-header">Reports</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">QuickBooks</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot lacks"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Stripe -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Stripe</h3>
-                                <div class="tool-category">Payment Processing</div>
-                            </div>
+                    <!-- AP Software Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>AP Software</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Web-based</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mobile</div></th>
+                                    <th class="feature-col"><div class="feature-header">OCR</div></th>
+                                    <th class="feature-col"><div class="feature-header">Workflows</div></th>
+                                    <th class="feature-col"><div class="feature-header">Scheduling</div></th>
+                                    <th class="feature-col"><div class="feature-header">Vendor Portal</div></th>
+                                    <th class="feature-col"><div class="feature-header">ERP Sync</div></th>
+                                    <th class="feature-col"><div class="feature-header">Audit Trail</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">Bill.com</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Gusto Payroll -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Gusto</h3>
-                                <div class="tool-category">Payroll & HR</div>
-                            </div>
+                    <!-- Payroll Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>Payroll</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Cloud</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mobile App</div></th>
+                                    <th class="feature-col"><div class="feature-header">Auto Tax</div></th>
+                                    <th class="feature-col"><div class="feature-header">Benefits</div></th>
+                                    <th class="feature-col"><div class="feature-header">Direct Deposit</div></th>
+                                    <th class="feature-col"><div class="feature-header">Time Track</div></th>
+                                    <th class="feature-col"><div class="feature-header">HR Tools</div></th>
+                                    <th class="feature-col"><div class="feature-header">International</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">Gusto</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot lacks"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Plaid -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Plaid</h3>
-                                <div class="tool-category">Bank Connectivity</div>
-                            </div>
+                    <!-- Expense Management Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>Expense Management</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot offline"></span>
-                            <span class="status-text offline">Connection Issue</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Web & Mobile</div></th>
+                                    <th class="feature-col"><div class="feature-header">OCR Scan</div></th>
+                                    <th class="feature-col"><div class="feature-header">Auto-cat</div></th>
+                                    <th class="feature-col"><div class="feature-header">Workflows</div></th>
+                                    <th class="feature-col"><div class="feature-header">Corp Cards</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mileage</div></th>
+                                    <th class="feature-col"><div class="feature-header">Multi-currency</div></th>
+                                    <th class="feature-col"><div class="feature-header">Acct Sync</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">Expensify</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Expensify -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Expensify</h3>
-                                <div class="tool-category">Expense Management</div>
-                            </div>
+                    <!-- Payment Processing Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>Payment Processing</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">API-first</div></th>
+                                    <th class="feature-col"><div class="feature-header">Multi Payment</div></th>
+                                    <th class="feature-col"><div class="feature-header">Recurring</div></th>
+                                    <th class="feature-col"><div class="feature-header">Global</div></th>
+                                    <th class="feature-col"><div class="feature-header">Fraud Detect</div></th>
+                                    <th class="feature-col"><div class="feature-header">Dev Tools</div></th>
+                                    <th class="feature-col"><div class="feature-header">Revenue Rec</div></th>
+                                    <th class="feature-col"><div class="feature-header">Dashboard</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">Stripe</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- QuickBooks Online -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>QuickBooks Online</h3>
-                                <div class="tool-category">Accounting</div>
-                            </div>
+                    <!-- Reporting Card -->
+                    <div class="stack-category-card">
+                        <div class="card-header">
+                            <h3>Reporting & BI</h3>
                         </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
-                    </div>
-
-                    <!-- Tableau -->
-                    <div class="status-card">
-                        <div class="status-card-left">
-                            <div class="tool-info">
-                                <h3>Tableau</h3>
-                                <div class="tool-category">Financial Reporting & Analytics</div>
-                            </div>
-                        </div>
-                        <div class="status-card-right">
-                            <span class="status-dot online"></span>
-                            <span class="status-text online">Operational</span>
-                        </div>
+                        <table class="category-table">
+                            <thead>
+                                <tr>
+                                    <th class="platform-col">Platform</th>
+                                    <th class="feature-col"><div class="feature-header">Web & Desktop</div></th>
+                                    <th class="feature-col"><div class="feature-header">Dashboards</div></th>
+                                    <th class="feature-col"><div class="feature-header">Connectors</div></th>
+                                    <th class="feature-col"><div class="feature-header">Real-time</div></th>
+                                    <th class="feature-col"><div class="feature-header">Mobile View</div></th>
+                                    <th class="feature-col"><div class="feature-header">Collab</div></th>
+                                    <th class="feature-col"><div class="feature-header">Calculations</div></th>
+                                    <th class="feature-col"><div class="feature-header">Scheduled</div></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="platform-cell">Tableau</td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                    <td class="feature-cell"><span class="feature-dot has"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -616,18 +614,18 @@
                         <!-- Header Row -->
                         <div class="matrix-header">
                             <div class="task-name-column">Task</div>
-                            <div class="month-column">Jan</div>
-                            <div class="month-column">Feb</div>
-                            <div class="month-column">Mar</div>
-                            <div class="month-column">Apr</div>
-                            <div class="month-column">May</div>
-                            <div class="month-column">Jun</div>
-                            <div class="month-column">Jul</div>
-                            <div class="month-column">Aug</div>
-                            <div class="month-column">Sep</div>
-                            <div class="month-column">Oct</div>
-                            <div class="month-column">Nov</div>
-                            <div class="month-column current-month">Dec</div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column"></div>
+                            <div class="month-column current-month"></div>
                         </div>
 
                         <!-- Accounts Payable Section -->

@@ -1,4 +1,4 @@
-# CFO Platform - Finance Operations Dashboard
+# ENGI finance - Finance Operations Dashboard
 
 A fully interactive HTML/CSS/JavaScript mockup for a CFO-as-a-Service platform that helps manage financial operations, track monthly close processes, monitor software stack status, and handle approvals.
 
