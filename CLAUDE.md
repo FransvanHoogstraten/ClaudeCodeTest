@@ -4,45 +4,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A simple Python calculator application demonstrating basic arithmetic operations with a test suite.
+ENGI finance - A Finance Operations Dashboard for CFO-as-a-Service. This is a fully interactive HTML/CSS/JavaScript mockup that helps manage financial operations, track monthly close processes, monitor software stack status, and handle approvals.
 
-## Development Commands
+## Running the Application
 
-### Setup
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
+# Open in default browser
+open index.html
 ```
 
-### Running the Application
-```bash
-python calculator.py
-```
-
-### Testing
-```bash
-# Run all tests
-pytest
-
-# Run tests with coverage
-pytest --cov=. --cov-report=html
-
-# Run specific test
-pytest test_calculator.py::TestCalculator::test_add
-
-# Run tests in verbose mode
-pytest -v
-```
+Or simply drag `index.html` into your web browser.
 
 ## Code Architecture
 
 ### Structure
-- `calculator.py` - Contains the `Calculator` class with arithmetic operations (add, subtract, multiply, divide, power) and an interactive CLI in `main()`
-- `test_calculator.py` - Pytest-based unit tests with fixtures and comprehensive test coverage
+- `index.html` - Main HTML structure with dashboard layout, navigation, and all UI components
+- `styles.css` - Modern minimal styling with CSS variables for theming, responsive design
+- `script.js` - Interactive functionality (tab navigation, filters, approvals, cash flow diagram)
+
+### Key Features
+- **Structure Maps**: Cash flow and data flow visualizations
+- **Software Stack Status**: Real-time operational status for financial tools (NetSuite, Bill.com, Stripe, etc.)
+- **Monthly Close Checklist**: Interactive task tracking with progress indicators
+- **Issues & Blockers**: Priority-based issue tracker
+- **Pending Approvals**: Human-in-the-loop approval queue
+
+### Design System
+- Primary: Blue (#0066FF)
+- Success: Green (#10B981)
+- Warning: Orange (#F59E0B)
+- Danger: Red (#EF4444)
+- CSS variables defined at top of `styles.css` for easy theming
 
 ### Key Design Points
-- Calculator class methods are pure functions that don't maintain state
-- Division by zero raises a `ValueError` with descriptive message
-- Interactive CLI handles user input validation and error cases
-- Tests use pytest fixtures for Calculator instantiation
+- Static mockup with no backend - all data is in HTML
+- Sidebar navigation with collapsible state persisted to localStorage
+- Tab-based content switching via JavaScript
+- Responsive layout for mobile, tablet, and desktop

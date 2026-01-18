@@ -38,6 +38,18 @@ function initializeTabs() {
     const sidebarButtons = document.querySelectorAll('.sidebar-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
+    // Check URL hash for active tab on page load
+    const hash = window.location.hash.substring(1); // Remove the '#'
+    if (hash) {
+        const hashButton = document.querySelector(`.sidebar-button[data-tab="${hash}"]`);
+        if (hashButton) {
+            sidebarButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            hashButton.classList.add('active');
+            document.getElementById(hash).classList.add('active');
+        }
+    }
+
     sidebarButtons.forEach(button => {
         button.addEventListener('click', () => {
             const targetTab = button.getAttribute('data-tab');
@@ -49,7 +61,24 @@ function initializeTabs() {
             // Add active class to clicked button and corresponding content
             button.classList.add('active');
             document.getElementById(targetTab).classList.add('active');
+
+            // Update URL hash
+            window.location.hash = targetTab;
         });
+    });
+
+    // Listen for hash changes (browser back/forward buttons)
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            const hashButton = document.querySelector(`.sidebar-button[data-tab="${hash}"]`);
+            if (hashButton) {
+                sidebarButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                hashButton.classList.add('active');
+                document.getElementById(hash).classList.add('active');
+            }
+        }
     });
 }
 
@@ -124,38 +153,126 @@ function updateMonthlyCloseProgress() {
     });
 }
 
-// Filter Functionality for Issues
+// Filter Functionality for Issues Table
 function initializeFilters() {
-    const filterChips = document.querySelectorAll('.filter-chip');
-    const issueCards = document.querySelectorAll('.issue-card');
+    initializeIssuesDropdowns();
+    initializeIssuesSearch();
+    initializeIssuesTableFiltering();
+}
 
-    filterChips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            // Remove active class from all chips
-            filterChips.forEach(c => c.classList.remove('active'));
+// Initialize dropdown toggle functionality
+function initializeIssuesDropdowns() {
+    const dropdownButtons = document.querySelectorAll('.issues-dropdown-btn');
 
-            // Add active class to clicked chip
-            this.classList.add('active');
+    dropdownButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const dropdown = this.closest('.issues-dropdown');
 
-            // Get filter text
-            const filterText = this.textContent.toLowerCase();
-
-            // Filter issues
-            issueCards.forEach(card => {
-                if (filterText.includes('all')) {
-                    card.style.display = 'block';
-                } else if (filterText.includes('critical') && card.classList.contains('critical')) {
-                    card.style.display = 'block';
-                } else if (filterText.includes('high') && card.classList.contains('high')) {
-                    card.style.display = 'block';
-                } else if (filterText.includes('medium') && card.classList.contains('medium')) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+            // Close other dropdowns
+            document.querySelectorAll('.issues-dropdown').forEach(d => {
+                if (d !== dropdown) {
+                    d.classList.remove('open');
                 }
             });
+
+            // Toggle current dropdown
+            dropdown.classList.toggle('open');
         });
     });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.issues-dropdown')) {
+            document.querySelectorAll('.issues-dropdown').forEach(d => {
+                d.classList.remove('open');
+            });
+        }
+    });
+
+    // Add change listeners to checkboxes for filtering
+    const checkboxes = document.querySelectorAll('.issues-dropdown-menu input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            filterIssuesTable();
+        });
+    });
+}
+
+// Initialize search functionality
+function initializeIssuesSearch() {
+    const searchInput = document.getElementById('issuesSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            filterIssuesTable();
+        });
+    }
+}
+
+// Initialize table filtering
+function initializeIssuesTableFiltering() {
+    // Initial filter application
+    filterIssuesTable();
+}
+
+// Filter issues table based on current selections
+function filterIssuesTable() {
+    const tableRows = document.querySelectorAll('.issues-table tbody tr');
+    const searchInput = document.getElementById('issuesSearchInput');
+    const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+
+    // Get selected filters
+    const selectedStatuses = getSelectedValues('statusDropdown');
+    const selectedPriorities = getSelectedValues('priorityDropdown');
+    const selectedSystems = getSelectedValues('systemDropdown');
+
+    let visibleCount = 0;
+
+    tableRows.forEach(row => {
+        const rowStatus = row.getAttribute('data-status');
+        const rowPriority = row.getAttribute('data-priority');
+        const rowSystem = row.getAttribute('data-system');
+        const rowText = row.textContent.toLowerCase();
+
+        // Check if row matches all filters
+        const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.includes(rowStatus);
+        const matchesPriority = selectedPriorities.length === 0 || selectedPriorities.includes(rowPriority);
+        const matchesSystem = selectedSystems.length === 0 || selectedSystems.includes(rowSystem);
+        const matchesSearch = searchTerm === '' || rowText.includes(searchTerm);
+
+        if (matchesStatus && matchesPriority && matchesSystem && matchesSearch) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+
+    // Update pagination info
+    updatePaginationInfo(visibleCount);
+}
+
+// Get selected checkbox values from a dropdown
+function getSelectedValues(dropdownId) {
+    const dropdown = document.getElementById(dropdownId);
+    if (!dropdown) return [];
+
+    const checkedBoxes = dropdown.querySelectorAll('input[type="checkbox"]:checked');
+    return Array.from(checkedBoxes).map(cb => cb.value);
+}
+
+// Update pagination info text
+function updatePaginationInfo(count) {
+    const paginationInfo = document.querySelector('.pagination-info');
+    if (paginationInfo) {
+        if (count === 0) {
+            paginationInfo.textContent = 'No issues found';
+        } else if (count === 1) {
+            paginationInfo.textContent = 'Showing 1 of 1 issue';
+        } else {
+            paginationInfo.textContent = `Showing 1-${count} of ${count} issues`;
+        }
+    }
 }
 
 // Approval Button Actions

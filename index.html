@@ -899,134 +899,163 @@
             <!-- Issues Tab -->
             <div id="issues" class="tab-content">
                 <div class="content-header">
-                    <h2>Issues & Blockers</h2>
+                    <h2>Issues</h2>
                     <p class="subtitle">Track and resolve finance operations issues</p>
-                    <div class="filters">
-                        <button class="filter-chip active">All (5)</button>
-                        <button class="filter-chip">Critical (2)</button>
-                        <button class="filter-chip">High (2)</button>
-                        <button class="filter-chip">Medium (1)</button>
+                    <div class="status-legend">
+                        <div class="legend-status">
+                            <span class="priority-icon high">↑</span>
+                            <span>High</span>
+                        </div>
+                        <div class="legend-status">
+                            <span class="priority-icon medium">=</span>
+                            <span>Medium</span>
+                        </div>
+                        <div class="legend-status">
+                            <span class="priority-icon low">↓</span>
+                            <span>Low</span>
+                        </div>
                     </div>
                 </div>
-                <div class="issues-list">
-                    <!-- Critical Issue 1 -->
-                    <div class="issue-card critical">
-                        <div class="issue-header">
-                            <div class="issue-title-section">
-                                <span class="issue-priority critical">Critical</span>
-                                <h3 class="issue-title">Bank reconciliation discrepancy - $15,000 variance</h3>
-                            </div>
+
+                <!-- Issues Toolbar -->
+                <div class="issues-toolbar">
+                    <div class="issues-toolbar-left">
+                        <div class="issues-search">
+                            <input type="text" placeholder="Search issues..." class="issues-search-input" id="issuesSearchInput">
                         </div>
-                        <p class="issue-description">
-                            Main operating account shows a $15,000 variance between bank statement and GL. Needs immediate investigation to identify missing transactions or errors.
-                        </p>
-                        <div class="issue-meta">
-                            <div class="issue-meta-item">
-                                <span>Assigned: Sarah Chen</span>
+                        <div class="issues-filter-group">
+                            <div class="issues-dropdown">
+                                <button class="issues-dropdown-btn" data-dropdown="priority">
+                                    Priority <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="issues-dropdown-menu" id="priorityDropdown">
+                                    <label class="dropdown-item"><input type="checkbox" value="high" checked> High</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="medium" checked> Medium</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="low" checked> Low</label>
+                                </div>
                             </div>
-                            <div class="issue-meta-item">
-                                <span>Process: Bank Reconciliation</span>
+                            <div class="issues-dropdown">
+                                <button class="issues-dropdown-btn" data-dropdown="system">
+                                    System <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="issues-dropdown-menu" id="systemDropdown">
+                                    <label class="dropdown-item"><input type="checkbox" value="netsuite" checked> NetSuite</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="plaid" checked> Plaid</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="gusto" checked> Gusto</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="expensify" checked> Expensify</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="billcom" checked> Bill.com</label>
+                                </div>
                             </div>
-                            <div class="issue-meta-item">
-                                <span>Status: In Progress</span>
+                            <div class="issues-dropdown">
+                                <button class="issues-dropdown-btn" data-dropdown="status">
+                                    Status <span class="dropdown-arrow">▼</span>
+                                </button>
+                                <div class="issues-dropdown-menu" id="statusDropdown">
+                                    <label class="dropdown-item"><input type="checkbox" value="open" checked> Open</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="in-progress" checked> In Progress</label>
+                                    <label class="dropdown-item"><input type="checkbox" value="resolved"> Resolved</label>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Critical Issue 2 -->
-                    <div class="issue-card critical">
-                        <div class="issue-header">
-                            <div class="issue-title-section">
-                                <span class="issue-priority critical">Critical</span>
-                                <h3 class="issue-title">Plaid connection down - bank feed interrupted</h3>
-                            </div>
-                        </div>
-                        <p class="issue-description">
-                            Plaid API connection is failing since Dec 26. Automatic bank transactions are not syncing. Manual import required until resolved.
-                        </p>
-                        <div class="issue-meta">
-                            <div class="issue-meta-item">
-                                <span>Assigned: IT Support</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Tool: Plaid Integration</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Status: Open</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Issues Table -->
+                <div class="issues-table-container">
+                    <table class="issues-table">
+                        <thead>
+                            <tr>
+                                <th class="col-priority">Priority</th>
+                                <th class="col-key">Key</th>
+                                <th class="col-summary">Summary</th>
+                                <th class="col-system">System</th>
+                                <th class="col-status">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-priority="high" data-status="in-progress" data-system="netsuite">
+                                <td class="col-priority">
+                                    <span class="priority-icon high" title="High">↑</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-101</a></td>
+                                <td class="col-summary">Bank reconciliation variance $15K</td>
+                                <td class="col-system">NetSuite</td>
+                                <td class="col-status"><span class="issue-status in-progress">In Progress</span></td>
+                            </tr>
+                            <tr data-priority="high" data-status="open" data-system="plaid">
+                                <td class="col-priority">
+                                    <span class="priority-icon high" title="High">↑</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-102</a></td>
+                                <td class="col-summary">Bank feed connection failing</td>
+                                <td class="col-system">Plaid</td>
+                                <td class="col-status"><span class="issue-status open">Open</span></td>
+                            </tr>
+                            <tr data-priority="high" data-status="open" data-system="netsuite">
+                                <td class="col-priority">
+                                    <span class="priority-icon high" title="High">↑</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-103</a></td>
+                                <td class="col-summary">Revenue recognition incomplete</td>
+                                <td class="col-system">NetSuite</td>
+                                <td class="col-status"><span class="issue-status open">Open</span></td>
+                            </tr>
+                            <tr data-priority="low" data-status="open" data-system="netsuite">
+                                <td class="col-priority">
+                                    <span class="priority-icon low" title="Low">↓</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-104</a></td>
+                                <td class="col-summary">Automate recurring journal entries</td>
+                                <td class="col-system">NetSuite</td>
+                                <td class="col-status"><span class="issue-status open">Open</span></td>
+                            </tr>
+                            <tr data-priority="medium" data-status="in-progress" data-system="gusto">
+                                <td class="col-priority">
+                                    <span class="priority-icon medium" title="Medium">=</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-105</a></td>
+                                <td class="col-summary">Payroll accrual calculation error</td>
+                                <td class="col-system">Gusto</td>
+                                <td class="col-status"><span class="issue-status in-progress">In Progress</span></td>
+                            </tr>
+                            <tr data-priority="low" data-status="resolved" data-system="expensify">
+                                <td class="col-priority">
+                                    <span class="priority-icon low" title="Low">↓</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-106</a></td>
+                                <td class="col-summary">Review Q4 expense reports</td>
+                                <td class="col-system">Expensify</td>
+                                <td class="col-status"><span class="issue-status resolved">Resolved</span></td>
+                            </tr>
+                            <tr data-priority="medium" data-status="open" data-system="plaid">
+                                <td class="col-priority">
+                                    <span class="priority-icon medium" title="Medium">=</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-107</a></td>
+                                <td class="col-summary">Add bank feed retry logic</td>
+                                <td class="col-system">Plaid</td>
+                                <td class="col-status"><span class="issue-status open">Open</span></td>
+                            </tr>
+                            <tr data-priority="medium" data-status="in-progress" data-system="billcom">
+                                <td class="col-priority">
+                                    <span class="priority-icon medium" title="Medium">=</span>
+                                </td>
+                                <td class="col-key"><a href="#" class="issue-key-link">FIN-108</a></td>
+                                <td class="col-summary">Invoice sync delay</td>
+                                <td class="col-system">Bill.com</td>
+                                <td class="col-status"><span class="issue-status in-progress">In Progress</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <!-- High Priority Issue 1 -->
-                    <div class="issue-card high">
-                        <div class="issue-header">
-                            <div class="issue-title-section">
-                                <span class="issue-priority high">High</span>
-                                <h3 class="issue-title">December revenue recognition incomplete</h3>
-                            </div>
-                        </div>
-                        <p class="issue-description">
-                            3 large customer contracts need review for proper revenue recognition timing. Waiting on legal approval for contract amendments.
-                        </p>
-                        <div class="issue-meta">
-                            <div class="issue-meta-item">
-                                <span>Assigned: Revenue Team</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Process: Revenue Recognition</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Status: Blocked</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- High Priority Issue 2 -->
-                    <div class="issue-card high">
-                        <div class="issue-header">
-                            <div class="issue-title-section">
-                                <span class="issue-priority high">High</span>
-                                <h3 class="issue-title">Accrued payroll calculation error</h3>
-                            </div>
-                        </div>
-                        <p class="issue-description">
-                            Payroll accrual calculation appears to be understated by approximately $8K. Need to verify PTO balances and commission calculations.
-                        </p>
-                        <div class="issue-meta">
-                            <div class="issue-meta-item">
-                                <span>Assigned: Payroll Team</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Process: Payroll</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Status: In Progress</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Medium Priority Issue -->
-                    <div class="issue-card medium">
-                        <div class="issue-header">
-                            <div class="issue-title-section">
-                                <span class="issue-priority medium">Medium</span>
-                                <h3 class="issue-title">Expense report backlog</h3>
-                            </div>
-                        </div>
-                        <p class="issue-description">
-                            12 expense reports from November still pending approval in Expensify. Total amount: $4,200. Need manager approval before month close.
-                        </p>
-                        <div class="issue-meta">
-                            <div class="issue-meta-item">
-                                <span>Assigned: Manager Team</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Tool: Expensify</span>
-                            </div>
-                            <div class="issue-meta-item">
-                                <span>Status: Open</span>
-                            </div>
-                        </div>
+                <!-- Issues Pagination -->
+                <div class="issues-pagination">
+                    <span class="pagination-info">Showing 1-8 of 8 issues</span>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>&lt;</button>
+                        <span class="pagination-page active">1</span>
+                        <button class="pagination-btn" disabled>&gt;</button>
                     </div>
                 </div>
             </div>
