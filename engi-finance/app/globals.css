@@ -37,13 +37,14 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  /* Minimalist Swiss - Sharp corners (2px max) */
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+  --radius-4xl: 2px;
   /* Custom colors for ENGI finance */
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
@@ -52,45 +53,67 @@
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: #f8fafc;
-  --foreground: #0f172a;
+  /* Minimalist Swiss - Sharp corners */
+  --radius: 2px;
+
+  /* Neutrals - High Contrast */
+  --background: #ffffff;
+  --foreground: #000000;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #000000;
   --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #2563eb;
+  --popover-foreground: #000000;
+
+  /* Primary - Black as primary action */
+  --primary: #000000;
   --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
+
+  /* Secondary/Muted - Subtle grays */
+  --secondary: #fafafa;
+  --secondary-foreground: #000000;
+  --muted: #fafafa;
+  --muted-foreground: #737373;
+  --accent: #fafafa;
+  --accent-foreground: #000000;
+
+  /* Semantic */
   --destructive: #ef4444;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #2563eb;
+
+  /* Borders - Minimal */
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #000000;
+
   /* Custom semantic colors */
-  --success: #10b981;
+  --success: #22c55e;
   --success-foreground: #ffffff;
-  --warning: #f59e0b;
-  --warning-foreground: #ffffff;
-  /* Chart colors */
-  --chart-1: #2563eb;
-  --chart-2: #10b981;
-  --chart-3: #f59e0b;
+  --warning: #eab308;
+  --warning-foreground: #000000;
+
+  /* Chart colors - Reduced palette */
+  --chart-1: #000000;
+  --chart-2: #22c55e;
+  --chart-3: #eab308;
   --chart-4: #ef4444;
-  --chart-5: #8b5cf6;
-  /* Sidebar - Dark theme */
-  --sidebar: #0f172a;
-  --sidebar-foreground: #e2e8f0;
-  --sidebar-primary: #2563eb;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e293b;
-  --sidebar-accent-foreground: #e2e8f0;
-  --sidebar-border: #1e293b;
-  --sidebar-ring: #2563eb;
+  --chart-5: #737373;
+
+  /* Sidebar - Pure black */
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #262626;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #262626;
+  --sidebar-ring: #ffffff;
+
+  /* Typography Scale (strict) */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
 }
 
 @layer base {
@@ -98,7 +121,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  /* Monospace for financial numbers */
+  .font-mono-numbers {
+    font-variant-numeric: tabular-nums;
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
   }
 }
 
@@ -108,5 +137,12 @@
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
+  }
+  /* Typography utilities */
+  .tracking-tight {
+    letter-spacing: -0.025em;
+  }
+  .tracking-wide {
+    letter-spacing: 0.05em;
   }
 }

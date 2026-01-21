@@ -10,7 +10,6 @@ import {
   AlertCircle,
   CheckSquare,
 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -59,8 +58,8 @@ export function Sidebar({ isCollapsed, approvalCount = 3, issueCount = 5 }: Side
   return (
     <nav
       className={cn(
-        'bg-sidebar border-r border-sidebar-border flex flex-col gap-1 py-4 transition-all duration-300',
-        isCollapsed ? 'w-0 overflow-hidden p-0 border-r-0' : 'w-[220px]'
+        'bg-sidebar flex flex-col gap-0.5 py-4 transition-all duration-300',
+        isCollapsed ? 'w-0 overflow-hidden p-0' : 'w-[200px]'
       )}
     >
       {navItems.map((item) => {
@@ -73,21 +72,18 @@ export function Sidebar({ isCollapsed, approvalCount = 3, issueCount = 5 }: Side
             key={item.href}
             href={item.href}
             className={cn(
-              'flex items-center gap-2 px-4 py-2 mx-2 rounded-md text-sm font-medium transition-colors',
+              'flex items-center gap-3 px-4 py-2 text-[13px] transition-colors',
               isActive
-                ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                : 'text-sidebar-foreground/70 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground'
+                ? 'text-white font-medium'
+                : 'text-white/60 hover:text-white'
             )}
           >
             <Icon className="h-4 w-4 shrink-0" />
             <span className="flex-1 truncate">{item.label}</span>
             {badgeCount !== undefined && badgeCount > 0 && (
-              <Badge
-                variant="secondary"
-                className="h-5 min-w-[20px] px-1.5 text-[11px] font-semibold bg-sidebar-foreground/20 text-sidebar-foreground hover:bg-sidebar-foreground/20"
-              >
+              <span className="text-[11px] text-white/50 font-medium tabular-nums">
                 {badgeCount}
-              </Badge>
+              </span>
             )}
           </Link>
         );

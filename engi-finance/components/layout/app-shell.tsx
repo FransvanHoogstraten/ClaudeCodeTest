@@ -18,8 +18,10 @@ export function AppShell({ children }: AppShellProps) {
       <Header onToggleSidebar={toggle} />
       <div className="flex flex-1">
         <Sidebar isCollapsed={isCollapsed} />
-        <main className="flex-1 p-6 bg-background overflow-auto">
-          {children}
+        <main className="flex-1 p-8 bg-background overflow-auto">
+          <div className="max-w-[1280px] mx-auto">
+            {children}
+          </div>
         </main>
       </div>
       <Toaster />
