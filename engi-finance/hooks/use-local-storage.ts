@@ -1,33 +1,46 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore, useCallback } from 'react';
 
 export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  useEffect(() => {
-    setIsHydrated(true);
+  const getSnapshot = (): T => {
     try {
       const item = window.localStorage.getItem(key);
-      if (item) {
-        setStoredValue(JSON.parse(item));
+      return item ? (JSON.parse(item) as T) : initialValue;
+    } catch {
+      return initialValue;
+    }
+  };
+
+  const subscribe = (onStoreChange: () => void): (() => void) => {
+    const handler = (e: StorageEvent) => {
+      if (e.key === key || e.key === null) {
+        onStoreChange();
       }
+    };
+    window.addEventListener('storage', handler);
+    const customHandler = () => onStoreChange();
+    window.addEventListener(`localStorage-${key}`, customHandler);
+    return () => {
+      window.removeEventListener('storage', handler);
+      window.removeEventListener(`localStorage-${key}`, customHandler);
+    };
+  };
+
+  const storedValue = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    () => initialValue
+  );
+
+  const setValue = useCallback((value: T) => {
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+      window.dispatchEvent(new CustomEvent(`localStorage-${key}`));
     } catch (error) {
       console.error(error);
     }
   }, [key]);
 
-  const setValue = (value: T) => {
-    try {
-      setStoredValue(value);
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(value));
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  return [isHydrated ? storedValue : initialValue, setValue];
+  return [storedValue, setValue];
 }
