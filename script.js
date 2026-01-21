@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeProcessExpand();
     initializeMatrixCells();
     initializeCashFlowDiagram();
+    initializeAlternativesToggle();
 });
 
 // Sidebar Toggle Functionality
@@ -64,6 +65,11 @@ function initializeTabs() {
 
             // Update URL hash
             window.location.hash = targetTab;
+
+            // Scroll to top of page
+            window.scrollTo(0, 0);
+            const mainContent = document.querySelector('.main-content');
+            if (mainContent) mainContent.scrollTop = 0;
         });
     });
 
@@ -77,6 +83,11 @@ function initializeTabs() {
                 tabContents.forEach(content => content.classList.remove('active'));
                 hashButton.classList.add('active');
                 document.getElementById(hash).classList.add('active');
+
+                // Scroll to top of page
+                window.scrollTo(0, 0);
+                const mainContent = document.querySelector('.main-content');
+                if (mainContent) mainContent.scrollTop = 0;
             }
         }
     });
@@ -279,17 +290,16 @@ function updatePaginationInfo(count) {
 function initializeApprovalButtons() {
     const approveButtons = document.querySelectorAll('.approve-btn');
     const rejectButtons = document.querySelectorAll('.reject-btn');
-    const reviewButtons = document.querySelectorAll('.review-btn');
 
     approveButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            const card = this.closest('.approval-card');
-            const title = card.querySelector('.approval-title').textContent;
+            const row = this.closest('tr');
+            const title = row.querySelector('.col-summary').textContent;
 
             if (confirm(`Are you sure you want to approve: ${title}?`)) {
-                card.style.opacity = '0.5';
-                card.style.pointerEvents = 'none';
+                row.style.opacity = '0.5';
+                row.style.pointerEvents = 'none';
 
                 // Show success message
                 showNotification('Approval submitted successfully', 'success');
@@ -297,7 +307,7 @@ function initializeApprovalButtons() {
                 // Update badge count after animation
                 setTimeout(() => {
                     updateApprovalBadge();
-                    card.remove();
+                    row.remove();
                 }, 500);
             }
         });
@@ -306,40 +316,28 @@ function initializeApprovalButtons() {
     rejectButtons.forEach(btn => {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            const card = this.closest('.approval-card');
-            const title = card.querySelector('.approval-title').textContent;
+            const row = this.closest('tr');
+            const title = row.querySelector('.col-summary').textContent;
 
             const reason = prompt('Please provide a reason for rejection:');
             if (reason) {
-                card.style.opacity = '0.5';
-                card.style.pointerEvents = 'none';
+                row.style.opacity = '0.5';
+                row.style.pointerEvents = 'none';
 
                 showNotification('Rejection submitted', 'warning');
 
                 setTimeout(() => {
                     updateApprovalBadge();
-                    card.remove();
+                    row.remove();
                 }, 500);
             }
-        });
-    });
-
-    reviewButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const card = this.closest('.approval-card');
-            const title = card.querySelector('.approval-title').textContent;
-            const amount = card.querySelector('.approval-amount').textContent;
-            const details = card.querySelector('.approval-details').textContent;
-
-            alert(`Review Details:\n\n${title}\n\nAmount: ${amount}\n\n${details}\n\nClick Approve or Reject to proceed.`);
         });
     });
 }
 
 // Update Approval Badge Count
 function updateApprovalBadge() {
-    const remainingApprovals = document.querySelectorAll('.approval-card').length;
+    const remainingApprovals = document.querySelectorAll('.approvals-table tbody tr').length;
     const badge = document.querySelector('[data-tab="approvals"] .tab-badge');
 
     if (badge) {
@@ -850,6 +848,30 @@ function initializeFlowNodeInteractions() {
 
             // Show modal
             modal.classList.add('active');
+        });
+    });
+}
+
+// Software Stack Alternatives Toggle
+function initializeAlternativesToggle() {
+    const toggleButtons = document.querySelectorAll('.show-alternatives-btn');
+
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const card = this.closest('.stack-category-card');
+            const alternativesTbody = card.querySelector('.alternatives-tbody');
+
+            if (alternativesTbody) {
+                alternativesTbody.classList.toggle('visible');
+                this.classList.toggle('expanded');
+
+                // Update button text
+                if (alternativesTbody.classList.contains('visible')) {
+                    this.innerHTML = 'Hide alternatives <span class="arrow">▲</span>';
+                } else {
+                    this.innerHTML = 'Show alternatives <span class="arrow">▼</span>';
+                }
+            }
         });
     });
 }
